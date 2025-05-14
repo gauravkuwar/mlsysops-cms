@@ -1,0 +1,6 @@
+[submodule "app"]
+	path = app
+	url = https://github.com/gauravkuwar/mlsysops-cms-app.git
+[submodule "iac"]
+	path = iac
+	url = https://github.com/gauravkuwar/mlsysops-cms-iac.git
