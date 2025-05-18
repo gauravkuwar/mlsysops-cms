@@ -20,7 +20,7 @@ This project builds a complete machine learning system to operationalize a conte
 
   * Node 1: Control plane
   * Nodes 2 & 3: Worker nodes
-* **Manual Installation:** K8s was installed without KubeSpray to control dependencies manually.
+* **Manual Selected K8s Dependencies:** K8s was installed without KubeSpray to control dependencies manually, but the installtion process is completed automated with ansible.
 * **Core Services:**
 
   * Container Registry
@@ -115,7 +115,21 @@ This project builds a complete machine learning system to operationalize a conte
   * ✅ Dynamic quantization
   * ✅ ONNXRuntime CPU + GPU tested
 
-> **Suggested Screenshot:** Benchmark comparison table or graphs
+### 🧠 Inference Optimization Summary
+
+| Model Variant               | Format      | Device         | Model Size | Accuracy | Latency (Median) | Throughput (FPS) | Batch Throughput (FPS) |
+|----------------------------|-------------|----------------|------------|----------|------------------|------------------|------------------------|
+| PyTorch (Eager)            | TorchScript | CPU            | 17.56 MB   | 92.02%   | 3.61 ms          | 270.66           | 1358.45                |
+| PyTorch (Compiled)         | TorchScript | CPU            | 17.56 MB   | 92.02%   | 1.82 ms          | 540.00           | 2170.57                |
+| ONNX (Base)                | ONNX        | CPU            | 17.61 MB   | 92.02%   | 1.16 ms          | 779.74           | 1980.38                |
+| ONNX (Graph Optimized)     | ONNX        | CPU            | 17.61 MB   | 92.02%   | 1.47 ms          | 680.18           | 1466.31                |
+| ONNX (Quantized - Dynamic) | ONNX        | CPU            | 4.51 MB    | 92.02%   | 1.52 ms          | 653.39           | 1767.16                |
+| ONNX (Base)                | ONNX        | GPU (CUDA)     | 17.61 MB   | 92.02%   | 0.72 ms          | 1361.41          | 78767.20               |
+
+### ✅ Key Takeaways
+- **Quantization** reduced model size by ~75% with no accuracy drop.
+- **ONNX with CUDA** gives the highest throughput (~78k FPS).
+- **ONNX on CPU** (base) outperforms TorchScript in both latency and throughput.
 
 ### System Optimizations to Satisfy Requirements (Not Done)
 
