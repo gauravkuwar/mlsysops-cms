@@ -14,8 +14,6 @@ This project builds a complete machine learning system to operationalize a conte
 * **Networking:** A private network is created and attached to a shared network, with a floating IP for access.
 * **Storage:** A manually created block storage volume is mounted to Node 1 to persist data and artifacts.
 
-> **Suggested Screenshot:** Terraform execution plan or CLI output showing instance provisioning
-
 ### Cloud-Native (Completed)
 
 * **Kubernetes Cluster:**
