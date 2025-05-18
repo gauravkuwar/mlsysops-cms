@@ -24,12 +24,12 @@ This project builds a complete machine learning system to operationalize a conte
   * Nodes 2 & 3: Worker nodes
 * **Manual Selected K8s Dependencies:** K8s was installed without KubeSpray to control dependencies manually, but the installtion process is completed automated with ansible. ([Ansible Installation File Link](https://github.com/gauravkuwar/mlsysops-cms-iac/blob/d4b3df9b2e140e9f39d68446564b468cc1915285/ansible/k8s/k8s_install.yml))
 
-**Kubernetes Cluster Nodes**
+**Kubernetes Cluster Nodes** <br>
 
 ![](images/k8_nodes.png)
 
 
-**Kubernetes Cluster Pods**
+**Kubernetes Cluster Pods** <br>
 
 ![](images/kubectl_pods.png)
 
@@ -52,11 +52,11 @@ This project builds a complete machine learning system to operationalize a conte
 * **Kaniko** builds containers with cache and DAG parallelism.
 * **[mlops-pipeline](https://github.com/gauravkuwar/mlsysops-cms-iac/blob/d4b3df9b2e140e9f39d68446564b468cc1915285/workflows/mlops-pipeline.yaml)** triggers mock training → offline evaluation → [ONNX optimization](https://github.com/gauravkuwar/mlsysops-cms-pipeline/blob/a86e09fc036f3f8750d9817ff5d9de7b082535a5/optimize/main.py) → staging load test → model promotion.
 
-**Container Build Pipeline**
+**Container Build Pipeline** <br>
 
 ![Alt text](images/container_build_pipeline.png)
 
-**MLOps Pipeline**
+**MLOps Pipeline** <br>
 
 ![Alt text](images/mlops_pipeline.png)
 
@@ -65,7 +65,7 @@ This project builds a complete machine learning system to operationalize a conte
 * Four stages: **development**, **staging**, **canary**, **production**.
 * Each stage has its own model served from a unique MLflow alias.
 
-**ArgoCD Dashboard**
+**ArgoCD Dashboard** <br>
 
 ![Alt text](images/argocd.png)
 
@@ -85,11 +85,11 @@ This project builds a complete machine learning system to operationalize a conte
 
 * **MLflow** tracks all model runs, metrics, and artifacts.
 
-**MLflow Jobs**
+**MLflow Jobs** <br>
 
 ![Alt text](images/mlflow_jobs.png)
 
-**MLflow Models**
+**MLflow Models** <br>
 
 ![Alt text](images/mlflow_models.png)
 
@@ -221,10 +221,10 @@ Result: PASS
   * Save to persistent storage
 
 
-**Argo Workflow Data pipeline**
+**Argo Workflow Data pipeline**<br>
 
 ![Alt text](images/datapipeline.png)
 
-**Simple App UI**
+**Simple App UI**<br>
 
 ![Alt text](images/app_ui.png)
