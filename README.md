@@ -98,7 +98,7 @@ This project builds a complete machine learning system to operationalize a conte
 * On boot, each stage loads the corresponding MLflow model.
 * Periodic polling detects model updates and reloads dynamically.
 
-### Identify Requirements (To Finalize)
+### Identify Requirements
 
 * Requirements include:
 
@@ -166,7 +166,7 @@ Result: PASS
 
 * Initial Plan: Integrate with **Label Studio** for human feedback and retraining
 
-### Define a Business-Specific Evaluation (To Finalize)
+### Define a Business-Specific Evaluation
 
 * Proposed: Track false positives for flagged non-toxic comments
 * Custom metric: false positive rate (FPR) at specific sensitivity thresholds
