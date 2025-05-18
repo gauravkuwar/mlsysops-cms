@@ -2,7 +2,7 @@
 
 ## Content Moderation System / Toxicity Classifier
 
-This project builds a complete machine learning system to operationalize a content moderation pipeline using the Jigsaw Toxic Comment Classification dataset. The goal is to not just train a classifier, but build a reproducible, cloud-native ML system with full DevOps, model lifecycle, evaluation, and deployment capabilities.
+This project builds a complete machine learning system to operationalize a content moderation pipeline using the [Jigsaw Toxic Comment Classification dataset](https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/data). The goal is to not just train a classifier, but build a reproducible, cloud-native ML system with full DevOps, model lifecycle, evaluation, and deployment capabilities.
 
 ---
 
@@ -14,19 +14,15 @@ This project builds a complete machine learning system to operationalize a conte
 * **Networking:** A private network is created and attached to a shared network, with a floating IP for access.
 * **Storage:** A manually created block storage volume is mounted to Node 1 to persist data and artifacts.
 
+* **[Terraform Code Dir](https://github.com/gauravkuwar/mlsysops-cms-iac/tree/d4b3df9b2e140e9f39d68446564b468cc1915285/tf/kvm)**: this is basically the same as the lab.
+
 ### Cloud-Native (Completed)
 
 * **Kubernetes Cluster:**
 
   * Node 1: Control plane
   * Nodes 2 & 3: Worker nodes
-* **Manual Selected K8s Dependencies:** K8s was installed without KubeSpray to control dependencies manually, but the installtion process is completed automated with ansible.
-* **Core Services:**
-
-  * Container Registry
-  * CoreDNS
-  * Local-path-provisioner
-
+* **Manual Selected K8s Dependencies:** K8s was installed without KubeSpray to control dependencies manually, but the installtion process is completed automated with ansible. ([Ansible Installation File Link](https://github.com/gauravkuwar/mlsysops-cms-iac/blob/d4b3df9b2e140e9f39d68446564b468cc1915285/ansible/k8s/k8s_install.yml))
 
 **Kubernetes Cluster Nodes**
 ![Alt text](images/k8_nodes.png)
@@ -41,7 +37,7 @@ This project builds a complete machine learning system to operationalize a conte
 
 ### Infrastructure as Code (Completed)
 
-* A Jupyter notebook walks through infrastructure setup.
+* A [Jupyter notebook](https://github.com/gauravkuwar/mlsysops-cms/blob/main/main.ipynb) walks through infrastructure setup, with high reproducibility.
 * Ansible configures remote instances post-Terraform.
 
 ### Cloud-Native (Completed)
@@ -52,7 +48,7 @@ This project builds a complete machine learning system to operationalize a conte
 ### CI/CD and Continuous Training (Completed)
 
 * **Kaniko** builds containers with cache and DAG parallelism.
-* **mlops-pipeline** triggers mock training → offline evaluation → ONNX optimization → staging load test → model promotion.
+* **[mlops-pipeline](https://github.com/gauravkuwar/mlsysops-cms-iac/blob/d4b3df9b2e140e9f39d68446564b468cc1915285/workflows/mlops-pipeline.yaml)** triggers mock training → offline evaluation → [ONNX optimization](https://github.com/gauravkuwar/mlsysops-cms-pipeline/blob/a86e09fc036f3f8750d9817ff5d9de7b082535a5/optimize/main.py) → staging load test → model promotion.
 
 **Container Build Pipeline**
 ![Alt text](images/container_build_pipeline.png)
@@ -60,13 +56,14 @@ This project builds a complete machine learning system to operationalize a conte
 **MLOps Pipeline**
 ![Alt text](images/mlops_pipeline.png)
 
-### Staged Deployment (Completed)
+### [Staged Deployment](https://github.com/gauravkuwar/mlsysops-cms-iac/tree/d4b3df9b2e140e9f39d68446564b468cc1915285/k8s) (Completed)
 
 * Four stages: **development**, **staging**, **canary**, **production**.
 * Each stage has its own model served from a unique MLflow alias.
 
 **ArgoCD Dashboard**
 ![Alt text](images/argocd.png)
+
 
 ---
 
@@ -76,6 +73,7 @@ This project builds a complete machine learning system to operationalize a conte
 
 * Triggered via API.
 * Currently uses a mock training pod; architecture supports GPU training.
+* [Python File](https://github.com/gauravkuwar/mlsysops-cms-pipeline/blob/a86e09fc036f3f8750d9817ff5d9de7b082535a5/train/flow.py)
 
 
 ### Experiment Tracking (Completed)
@@ -97,6 +95,7 @@ This project builds a complete machine learning system to operationalize a conte
 * Flask API serves ONNX models via ONNXRuntime.
 * On boot, each stage loads the corresponding MLflow model.
 * Periodic polling detects model updates and reloads dynamically.
+* [App Repo](https://github.com/gauravkuwar/mlsysops-cms-app/tree/4c291c8da0e293729fb3e5807cde3e4cac047f36)
 
 ### Identify Requirements
 
@@ -108,6 +107,8 @@ This project builds a complete machine learning system to operationalize a conte
   * Support for concurrent requests (via gunicorn/async)
 
 ### Model Optimizations to Satisfy Requirements (Completed)
+
+* Link to Jupyter Notebook: [https://github.com/gauravkuwar/mlsysops-cms-inference-optimization/blob/74830e8cc17e741ac079ae10a28c4028bb825c0f/model_optimizations.ipynb](https://github.com/gauravkuwar/mlsysops-cms-inference-optimization/blob/74830e8cc17e741ac079ae10a28c4028bb825c0f/model_optimizations.ipynb)
 
 * Benchmarked PyTorch vs ONNX:
 
@@ -149,12 +150,14 @@ This project builds a complete machine learning system to operationalize a conte
 * Evaluates model on test split from preprocessed data
 * Metrics: accuracy, F1-score
 * Results logged to MLflow
+* Python File Link - [https://github.com/gauravkuwar/mlsysops-cms-pipeline/blob/a86e09fc036f3f8750d9817ff5d9de7b082535a5/eval/flow.py](https://github.com/gauravkuwar/mlsysops-cms-pipeline/blob/a86e09fc036f3f8750d9817ff5d9de7b082535a5/eval/flow.py)
 
 ### Load Test in Staging (Completed)
 
 * Load test hits `/predict` endpoint using `asyncio`
 * Measures latency, throughput, and concurrency
 * Used as gate to promote to canary
+* Python File Link - [https://github.com/gauravkuwar/mlsysops-cms-pipeline/blob/a86e09fc036f3f8750d9817ff5d9de7b082535a5/loadtest/main.py](https://github.com/gauravkuwar/mlsysops-cms-pipeline/blob/a86e09fc036f3f8750d9817ff5d9de7b082535a5/loadtest/main.py)
 
 ```
 [INFO] Waiting for /healthz to return version 30...
@@ -191,6 +194,7 @@ Result: PASS
 
 ### Persistent Storage (Completed)
 
+* [Ansible to mount, format and organize presistant volume](https://github.com/gauravkuwar/mlsysops-cms-iac/blob/d4b3df9b2e140e9f39d68446564b468cc1915285/ansible/post_k8s/block_configure.yml)
 * Mounted block storage on Node 1
 * Organized directory structure.
 
@@ -202,7 +206,7 @@ Result: PASS
 ### Data Pipelines (Completed)
 
 * Defined as Argo Workflow
-* Includes:
+* Includes: ([Python File](https://github.com/gauravkuwar/mlsysops-cms-pipeline/blob/a86e09fc036f3f8750d9817ff5d9de7b082535a5/data/main.py))
 
   * Download from Kaggle
   * Preprocessing
