@@ -1,2 +1,3 @@
-config/cloud.yaml
 .venv/
+kaggle.json
+.DS_Store

@@ -4,3 +4,9 @@
 [submodule "iac"]
 	path = iac
 	url = https://github.com/gauravkuwar/mlsysops-cms-iac.git
+[submodule "inference-optimization"]
+	path = inference-optimization
+	url = https://github.com/gauravkuwar/mlsysops-cms-inference-optimization.git
+[submodule "pipeline"]
+	path = pipeline
+	url = https://github.com/gauravkuwar/mlsysops-cms-pipeline.git
