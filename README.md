@@ -25,11 +25,13 @@ This project builds a complete machine learning system to operationalize a conte
 * **Manual Selected K8s Dependencies:** K8s was installed without KubeSpray to control dependencies manually, but the installtion process is completed automated with ansible. ([Ansible Installation File Link](https://github.com/gauravkuwar/mlsysops-cms-iac/blob/d4b3df9b2e140e9f39d68446564b468cc1915285/ansible/k8s/k8s_install.yml))
 
 **Kubernetes Cluster Nodes**
-![Alt text](images/k8_nodes.png)
+
+![](images/k8_nodes.png)
 
 
 **Kubernetes Cluster Pods**
-![Alt text](images/kubectl_pods.png)
+
+![](images/kubectl_pods.png)
 
 ---
 
@@ -51,9 +53,11 @@ This project builds a complete machine learning system to operationalize a conte
 * **[mlops-pipeline](https://github.com/gauravkuwar/mlsysops-cms-iac/blob/d4b3df9b2e140e9f39d68446564b468cc1915285/workflows/mlops-pipeline.yaml)** triggers mock training → offline evaluation → [ONNX optimization](https://github.com/gauravkuwar/mlsysops-cms-pipeline/blob/a86e09fc036f3f8750d9817ff5d9de7b082535a5/optimize/main.py) → staging load test → model promotion.
 
 **Container Build Pipeline**
+
 ![Alt text](images/container_build_pipeline.png)
 
 **MLOps Pipeline**
+
 ![Alt text](images/mlops_pipeline.png)
 
 ### [Staged Deployment](https://github.com/gauravkuwar/mlsysops-cms-iac/tree/d4b3df9b2e140e9f39d68446564b468cc1915285/k8s) (Completed)
@@ -62,6 +66,7 @@ This project builds a complete machine learning system to operationalize a conte
 * Each stage has its own model served from a unique MLflow alias.
 
 **ArgoCD Dashboard**
+
 ![Alt text](images/argocd.png)
 
 
@@ -81,9 +86,11 @@ This project builds a complete machine learning system to operationalize a conte
 * **MLflow** tracks all model runs, metrics, and artifacts.
 
 **MLflow Jobs**
+
 ![Alt text](images/mlflow_jobs.png)
 
 **MLflow Models**
+
 ![Alt text](images/mlflow_models.png)
 
 ---
@@ -215,7 +222,9 @@ Result: PASS
 
 
 **Argo Workflow Data pipeline**
+
 ![Alt text](images/datapipeline.png)
 
 **Simple App UI**
+
 ![Alt text](images/app_ui.png)
