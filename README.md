@@ -212,3 +212,6 @@ Result: PASS
 
 **Argo Workflow Data pipeline**
 ![Alt text](images/datapipeline.png)
+
+**Simple App UI**
+![Alt text](images/app_ui.png)
